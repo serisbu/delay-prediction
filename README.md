@@ -1,4 +1,8 @@
 # Midterm Report
+Video Link: https://www.youtube.com/watch?v=z7LYP2XCOFs
+
+[![Midterm Presentation](https://img.youtube.com/vi/z7LYP2XCOFs/0.jpg)](https://www.youtube.com/watch?v=z7LYP2XCOFs)
+
 ## Data Processing/Modelling
 - Downloading Required Data
   - MBTA 2024 - 2025 Zip Files
