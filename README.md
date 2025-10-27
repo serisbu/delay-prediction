@@ -1,3 +1,30 @@
+# Midterm Report
+## Data Processing
+- Downloading Required Data
+  - MBTA 2024 - 2025 Zip Files
+    - mbta_2024_url = "https://www.arcgis.com/sharing/rest/content/items/96c77138c3144906bce93d0257531b6a/data"
+    - mbta_2025_url = "https://www.arcgis.com/sharing/rest/content/items/924df13d845f4907bb6a6c3ed380d57a/data"
+  - Weather Data
+    - https://www.ncei.noaa.gov/data/global-hourly/access/2024/72509014739.csv
+- Data Cleaning
+  - Removal of None values
+  - Removal of incorrect measurements
+- Feature selection and calculations
+  - Features directly from dataset: "route_encoded","TMP", "wind_speed_mps", "wind_dir_deg"
+  - Features calculated:
+    - "day_of_week": 0-6 value assigned to Monday-Sunday
+    - "is_weekend": assigned 0 or 1 value whether the day is weekday/weekend
+    - "is_holiday": assigned 0 or 1 using holidays library
+    - "is_rainy": Using the AA1, AA2, AA3 values from database which are precipitation amounts, calculated the raindrop for the hour
+  - Labels:
+    - Early: Bus arrived 2 minutes earlier than the scheduled time
+    - On Time: Bus arrived within +/- 2 minutes range of scheduled time
+    - Late: Bus arrived more than 2 minutes late
+## Data Visualization
+  - ![Labels Plot](label_dist.png)
+  - ![Temperature Plot](temp_dist.png)
+  - ![Wind Plot](wind_dist.png)
+  - ![Rainy Hours Plot](is_rainy_counts.png)
 # Public Transportation Delay Classification (Proposal)
 ## Description
 As a daily user of public transportation, with this project, I would like to classify the arrival of local buses as late, early and on time depending on the  weather, time, and the day of the week for each stop. To do the classification, I will test different model types that are used in classification tasks like random forest classifier.
