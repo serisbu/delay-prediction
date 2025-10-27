@@ -1,5 +1,5 @@
 # Midterm Report
-## Data Processing
+## Data Processing/Modelling
 - Downloading Required Data
   - MBTA 2024 - 2025 Zip Files
     - mbta_2024_url = "https://www.arcgis.com/sharing/rest/content/items/96c77138c3144906bce93d0257531b6a/data"
@@ -25,6 +25,21 @@
   - ![Temperature Plot](temp_dist.png)
   - ![Wind Plot](wind_dist.png)
   - ![Rainy Hours Plot](is_rainy_counts.png)
+  - ![Performance by Day](performance_by_day.png)
+  - ![Performance by Hour](performance_by_hour.png)
+  - ![Delay vs Rain](delay_vs_rain.png)
+## Preliminary Results
+Used a random forest classifier with the following hyperparameters:
+  - 80%-20% training/test split for 10M rows
+  - n_estimators=50,
+    max_depth=20,
+    class_weight="balanced"
+  - ![Midterm Results](midterm_results.png)
+
+## Next Steps
+ - Increase accuracy
+ - Try different classification models
+ - Include 2025 datasets
 # Public Transportation Delay Classification (Proposal)
 ## Description
 As a daily user of public transportation, with this project, I would like to classify the arrival of local buses as late, early and on time depending on the  weather, time, and the day of the week for each stop. To do the classification, I will test different model types that are used in classification tasks like random forest classifier.
