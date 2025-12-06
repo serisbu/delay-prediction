@@ -9,7 +9,8 @@ Video Link: https://www.youtube.com/watch?v=z7LYP2XCOFs
     - mbta_2024_url = "https://www.arcgis.com/sharing/rest/content/items/96c77138c3144906bce93d0257531b6a/data"
     - mbta_2025_url = "https://www.arcgis.com/sharing/rest/content/items/924df13d845f4907bb6a6c3ed380d57a/data"
   - Weather Data
-    - https://www.ncei.noaa.gov/data/global-hourly/access/2024/72509014739.csv
+    - 2024 - https://www.ncei.noaa.gov/data/global-hourly/access/2024/72509014739.csv
+    - 2025 - https://www.ncei.noaa.gov/data/global-hourly/access/2025/72509014739.csv  - 2025-01-01 to 2025-08-27
 - Data Cleaning
   - Removal of None values
   - Removal of incorrect measurements
