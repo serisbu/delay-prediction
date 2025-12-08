@@ -26,4 +26,6 @@ jobs:
 
     # Step 4: Test Python environment by importing all required libraries
     - name: Test Python environment
-      run: python -c "import requests, pandas, holidays, matplotlib, seaborn, sklearn; print('All libraries imported successfully!')"
+      run: |
+        . venv/bin/activate
+        python -c "import requests, pandas, holidays, matplotlib, seaborn, sklearn; print('All libraries imported successfully!')"
