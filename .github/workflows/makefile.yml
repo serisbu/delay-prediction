@@ -1,0 +1,31 @@
+name: Makefile Python CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - uses: actions/checkout@v4
+
+    # Step 2: Set up Python 3.14
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.14'
+
+    # Step 3: Install dependencies via Makefile
+    - name: Run Makefile to set up environment
+      run: make
+
+    # Step 4: Test Python environment by importing all required libraries
+    - name: Test Python environment
+      run: |
+        . venv/bin/activate
+        python -c "import requests, pandas, holidays, matplotlib, seaborn, sklearn; print('All libraries imported successfully!')"
