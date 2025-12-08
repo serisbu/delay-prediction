@@ -1,3 +1,18 @@
+# Bus Delay Classification - Final Report
+
+## Project Setup Instructions
+  - Clone the repository
+  - Make sure "make" is installed to use the Makefile
+  - Open a terminal and type the following commands:
+    - If make isn't installed use the following commands in the terminal to setup your environment:
+      - python3 -m venv venv
+      - source venv/bin/activate (if using Linux/Mac) or .\venv\Scripts\Activate.ps1 (if using Windows)
+      - pip install -r requirements.txt
+    - If make is installed, type "make" to setup the environment
+  - Open main.ipynb file, select your python kernel from top right as the venv
+  - Run the cells in the same order to download the data and reproduce the results
+  - Note: Garbage collection cells are added because of the size of the dataset being used which delete used dataframes to free memory space. Make sure to run the cells in the same order.
+
 # Midterm Report
 Video Link: https://www.youtube.com/watch?v=z7LYP2XCOFs
 
