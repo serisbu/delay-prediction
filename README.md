@@ -1,5 +1,9 @@
 # Bus Delay Classification - Selman Eris
 
+Presentation Link: https://www.youtube.com/watch?v=dc_btdZB1-Y
+
+[![Final Presentation](https://img.youtube.com/vi/dc_btdZB1-Y/0.jpg)](https://www.youtube.com/watch?v=dc_btdZB1-Y)
+
 ## Project Setup Instructions
   - Clone the repository
   - Make sure "make" is installed to use the Makefile
@@ -71,7 +75,7 @@
   - Tried using the GridSearchCV but my system crashed, ended up manually trying various settings
 
 ### Model Performances
-  - Random Forest: [class_weight="balanced_subsample", n_estimators=250, max_depth=15, min_samples_split=20,]
+  - Random Forest: [class_weight="balanced_subsample", n_estimators=250, max_depth=15, min_samples_split=20]
   - ![Random Forest Result](/plots/rf_final.png)
   - Logistic Regression: [StandardScaler(), class_weight="balanced", solver="lbfgs", C=1.0]
   - ![Logistic Regression Result](/plots/logreg_final.png)
