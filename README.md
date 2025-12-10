@@ -1,4 +1,4 @@
-# Bus Delay Classification - Final Report
+# Bus Delay Classification
 
 ## Project Setup Instructions
   - Clone the repository
@@ -12,6 +12,81 @@
   - Open main.ipynb file, select your python kernel from top right as the venv
   - Run the cells in the same order to download the data and reproduce the results
   - Note: Garbage collection cells are added because of the size of the dataset being used which delete used dataframes to free memory space. Make sure to run the cells in the same order.
+  - Project is developed/tested on MacOS/Windows using Python 3.14 
+
+# Final Report
+## Summary of Midterm Progress
+ - Trained a Random Forest model with 0.57 accuracy using 2024 data
+ - Classified delay as early/ontime/late
+## Data Processing/Modelling
+  - Downloading Required Data
+    - MBTA 2024 - 2025 Zip Files
+      - mbta_2024_url = "https://www.arcgis.com/sharing/rest/content/items/96c77138c3144906bce93d0257531b6a/data"
+      - mbta_2025_url = "https://www.arcgis.com/sharing/rest/content/items/924df13d845f4907bb6a6c3ed380d57a/data"
+    - Weather Data
+      - 2024 - https://www.ncei.noaa.gov/data/global-hourly/access/2024/72509014739.csv
+      - 2025 - https://www.ncei.noaa.gov/data/global-hourly/access/2025/72509014739.csv  - 2025-01-01 to 2025-08-27
+
+  
+  - Data Cleaning
+    - Removal of None values
+    - Removal of incorrect measurements
+
+  - Total data count after cleaning: 42_160_356 
+  - Feature selection and calculations
+    - Features directly from dataset: "route_encoded","TMP", "wind_speed_mps", "wind_dir_deg"
+    - Features calculated:
+      - "day_of_week": 0-6 value assigned to Monday-Sunday
+      - "is_weekend": assigned 0 or 1 value whether the day is weekday/weekend
+      - "is_holiday": assigned 0 or 1 using holidays library
+      - "is_rainy": Using the AA1, AA2, AA3 values from database which are precipitation amounts, calculated the raindrop for the hour
+      - "hour": hour value of the bus arrival time
+      - "is_morning_peak": boolean value of if arrival hour is between (7, 10) am
+      - "is_evening_peak": boolean value of if arrival hour is between (16, 19)
+      - "month": month of the bus service/arrival
+      - "season": season as an int calculated using month
+      - "route_avg_delay": average delay of the route calculated using only the training data
+      - "hour_avg_delay": average delay in the service hour calculated using only the training data
+      - "route_hour_avg_delay": average delay of the route in that service hour calculated using only the training data
+    - Labels:
+      - On Time: Bus arrived within +/- 3 minutes range of scheduled time
+      - Not On Time: Bus arrived outside of 3 minute range of scheduled time
+## Visualizations
+  - ![Labels Plot](/plots/label_dist_final.png)
+  - ![Temperature Plot](/plots/temp_dist_final.png)
+  - ![Wind Plot](/plots/wind_dist_final.png)
+  - ![Rainy Hours Plot](/plots/is_rainy_counts_final.png)
+  - ![Performance by Day](/plots/performance_by_day_final.png)
+  - ![Performance by Hour](/plots/performance_by_hour_final.png)
+  - ![Delay vs Rain](/plots/delay_vs_rain_final.png)
+## Results
+### Model Selection and Tuning
+  - Train test split of approximately 75-25
+  - Used whole 2024 + half of 2025 as training
+  - Model Types Attempted:
+    - SVM: After letting it train for 500 minutes, I needed to manually stop (failure)
+    - Logistic Regression: Tried tuning the C paramater and with different train/test splits
+    - Random Forest: The paramaters I mainly tuned are n_estimators, max_depth, min_samples_split with different train/test splits
+
+  - Tried using the GridSearchCV but my system crashed, ended up manually trying various settings
+
+### Model Performances
+  - Random Forest: [class_weight="balanced_subsample", n_estimators=250, max_depth=15, min_samples_split=20,]
+  - ![Random Forest Result](/plots/rf_final.png)
+  - Logistic Regression: [StandardScaler(), class_weight="balanced", solver="lbfgs", C=1.0]
+  - ![Logistic Regression Result](/plots/logreg_final.png)
+
+
+Note: There are code blocks like the following in between cells to do garbage collection. My system wasn't able to allocate multiple dataframes with 43 million rows. So I added the blocks to free memory space.
+```
+var_list = ['combined', 'train_df', 'test_df', 'df_2025_train', 'df_2025_test']
+
+for var in var_list:
+    if var in globals():
+        del globals()[var]
+        
+gc.collect()
+```
 
 # Midterm Report
 Video Link: https://www.youtube.com/watch?v=z7LYP2XCOFs
@@ -41,20 +116,20 @@ Video Link: https://www.youtube.com/watch?v=z7LYP2XCOFs
     - On Time: Bus arrived within +/- 2 minutes range of scheduled time
     - Late: Bus arrived more than 2 minutes late
 ## Data Visualization
-  - ![Labels Plot](label_dist.png)
-  - ![Temperature Plot](temp_dist.png)
-  - ![Wind Plot](wind_dist.png)
-  - ![Rainy Hours Plot](is_rainy_counts.png)
-  - ![Performance by Day](performance_by_day.png)
-  - ![Performance by Hour](performance_by_hour.png)
-  - ![Delay vs Rain](delay_vs_rain.png)
+  - ![Labels Plot](/plots/label_dist.png)
+  - ![Temperature Plot](/plots/temp_dist.png)
+  - ![Wind Plot](/plots/wind_dist.png)
+  - ![Rainy Hours Plot](/plots/is_rainy_counts.png)
+  - ![Performance by Day](/plots/performance_by_day.png)
+  - ![Performance by Hour](/plots/performance_by_hour.png)
+  - ![Delay vs Rain](/plots/delay_vs_rain.png)
 ## Preliminary Results
 Used a random forest classifier with the following hyperparameters:
   - 80%-20% training/test split for 10M rows
   - n_estimators=50,
     max_depth=20,
     class_weight="balanced"
-  - ![Midterm Results](midterm_results.png)
+  - ![Midterm Results](/plots/midterm_results.png)
 
 ## Next Steps
  - Increase accuracy
