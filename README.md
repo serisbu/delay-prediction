@@ -1,4 +1,4 @@
-# Bus Delay Classification
+# Bus Delay Classification - Selman Eris
 
 ## Project Setup Instructions
   - Clone the repository
